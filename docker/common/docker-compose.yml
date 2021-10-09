@@ -1,0 +1,65 @@
+version: '2'
+services:
+  atmservice:
+    image: skayvanfar/atm-atm-service:atmservice
+    ports:
+      - "8081:8081"
+    environment:
+      PROFILE: "default"
+      SERVER_PORT: "8081"
+      ES_PORT:           9200
+  atmbankservice:
+    image: skayvanfar/atm-atm-bank-service:atmbankservice
+    ports:
+      - "8082:8082"
+    environment:
+      PROFILE: "default"
+      SERVER_PORT: "8082"
+      ES_PORT:           9200
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+  kafkaserver:
+    image: spotify/kafka
+    ports:
+      - 2181:2181
+      - 9092:9092
+
+
+#  configserver:
+#    image: skayvanfar/atm-confsvr:confsvr
+#    ports:
+#      - "8888:8888"
+#    environment:
+#      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+#      EUREKASERVER_PORT: "8761"
+#      ENCRYPT_KEY:       "IMSYMMETRIC"
+#  zipkin:
+#    image: skayvanfar/atm-zipkinsvr:zipkinsvr
+#    ports:
+#      - "9411:9411"
+#    environment:
+#      SERVER_PORT: "9411"
+#  zuulserver:
+#    image: skayvanfar/atm-zuulsvr:zuulsvr
+#    ports:
+#      - "5555:5555"
+#    environment:
+#      PROFILE: "default"
+#      SERVER_PORT: "5555"
+#      CONFIGSERVER_URI: "http://configserver:8888"
+#      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+#      EUREKASERVER_PORT:        "8761"
+#      ZIPKIN_URI: "http://zipkin:9411"
+#      DATABASESERVER_PORT:      "5432"
+#      CONFIGSERVER_PORT:        "8888"
+#      ORGSERVERNEW_PORT:        "8087"
+#  database:
+#    image: postgres:9.5
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_USER: "postgres"
+#      POSTGRES_PASSWORD: "p0stgr@s"
+#      POSTGRES_DB:       "atm_local"

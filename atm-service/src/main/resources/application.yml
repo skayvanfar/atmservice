@@ -1,0 +1,21 @@
+server:
+  port: 8081
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination:  orgChangeTopic
+          content-type: application/json
+      kafka:
+        binder:
+          zkNodes: localhost
+          brokers: localhost
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    ir.sk.atmservice: DEBUG
+
+redis.server: "redis"
+redis.port: "6379"
